@@ -100,16 +100,28 @@ body {
   .nav-links.active {
     display: flex;
   }
+
+  .hero-profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-profile .profile-image {
+    width: 140px;
+    height: 140px;
+  }
+
 }
 
 .terminal-section {
   padding: 120px 0;
   margin-bottom: 120px;
-  margin-top: -40px;
 }
 
 
 .terminal {
+  width: 100%;
+  max-width: 900px;
   background: linear-gradient(
     to bottom,
     rgba(15, 23, 42, 0.85),
@@ -118,7 +130,8 @@ body {
   border-radius: 24px;
   padding: 32px;
   margin-bottom: 120px;
-  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
 }
 
 body.dark .profile-role {
@@ -430,6 +443,8 @@ body.dark .youtube-link {
   align-items: center;
   gap: 40px;
   margin-top: 60px;
+  flex-direction: column;
+  text-align: center;
 }
 
 .hero-profile .profile-image {
@@ -454,11 +469,6 @@ body.dark .youtube-link {
 .hero-profile p {
   max-width: 600px;
   line-height: 1.6;
-}
-
-.hero-profile {
-  flex-direction: column;
-  text-align: center;
 }
 
 .hero-profile .profile-image {
@@ -502,16 +512,6 @@ body.dark .youtube-link {
   caret-color: #22c55e;
 }
 
-.terminal {
-  width: 100%;
-  max-width: 900px;
-  background-color: #020617;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-  
-}
-
 .terminal-header {
   padding: 12px 16px;
   display: flex;
@@ -543,10 +543,7 @@ body.dark .youtube-link {
   border: none;
   border-top: 1px solid #1e293b;
   font-family: "JetBrains Mono", monospace;
-}
-
-#terminalInput::placeholder {
-  color: #6b7280;
+  caret-color: #22c55e;
 }
 
 .terminal-heading {
@@ -609,20 +606,9 @@ body.dark .youtube-link {
   color: #e5e7eb;
 }
 
-#terminalInput {
-  caret-color: #22c55e;
-  font-family: "JetBrains Mono", monospace;
-}
-
 #terminalInput::selection {
   background: #2563eb;
   color: white;
-}
-
-.terminal-active {
-  box-shadow:
-    0 0 0 2px #2563eb,
-    0 30px 80px rgba(37, 99, 235, 0.35);
 }
 
 #terminalInput::placeholder {
