@@ -13,8 +13,10 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <header class="header">
-  <div class="header-content">
+    <header class="hero">
+        <div class="hero-overlay"></div>
+
+  <div class="hero-content">
     <h1>Moja pierwsza strona</h1>
 <button id="themeToggle">🌙 Tryb ciemny</button>
     <nav class="nav">
@@ -28,27 +30,47 @@
     <a href="#contact">Kontakt</a>
   </div>
 </nav>
+    <div class="hero-profile">
+      <img
+        src="images/profile.jpg"
+        alt="Zdjęcie profilowe MrDawkin"
+        class="profile-image"
+      />
+
+      <div class="profile-text">
+        <h2>Cześć, jestem MrDawkin 👋</h2>
+        <p class="profile-role">Junior DevOps Engineer</p>
+        <p>
+          Pracuję przy utrzymaniu i rozwoju systemów ERP w środowiskach
+          produkcyjnych, developerskich i testowych. Skupiam się na
+          automatyzacji, CI/CD oraz stabilności infrastruktury.
+        </p>
+
+        <button class="hero-cta" id="openTerminal">Open Terminal</button>
+        <span class="scroll-hint">↓ Interactive terminal below</span>
+      </div>
+    </div>
   </div>
 </header>
 
 <main class="main">
-    <section class="profile animate">
-    <img
-      src="images/profile.jpg"
-      alt="Zdjęcie profilowe MrDawkin"
-      class="profile-image"
-    />
+  <section class="terminal-section">
+  <h2 class="terminal-heading">Interactive Terminal</h2>
+    <div id="terminal" class="terminal animate">
+      <div class="terminal-header">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+      <span class="terminal-title">bash — mr-dawkin@cloud</span>
+    </div>
 
-    <div class="profile-text">
-      <h2>Cześć, jestem MrDawkin 👋</h2>
-      <p class="profile-role">Junior DevOps Engineer</p>
-      <p>
-        Junior DevOps Engineer z 1,5 roku doświadczenia komercyjnego.
-        Pracuję przy utrzymaniu i rozwoju środowisk ERP opartych o Linux i Windows.
-        Zajmuję się automatyzacją, CI/CD, Dockerem oraz obsługą baz danych
-        PostgreSQL i MySQL. Skupiam się na stabilności systemów oraz
-        usprawnianiu procesów wdrożeniowych.
-      </p>
+    <div class="terminal-body" id="terminalBody"></div>
+
+      <input
+        type="text"
+        id="terminalInput"
+        placeholder="Type a command..."
+      />
     </div>
   </section>
 
@@ -62,45 +84,52 @@
 
   <section id="stack" class="card animate">
     <h2>Stack / Technologie</h2>
+    
+     <p class="stack-intro">
+      Technologie, z którymi pracuję na co dzień przy utrzymaniu i rozwoju
+      systemów ERP w środowiskach produkcyjnych, developerskich i testowych.
+    </p>
 
     <div class="stack">
       <div class="stack-group">
         <h3>Systemy</h3>
-        <ul>
-          <li>Linux (administracja, troubleshooting)</li>
-          <li>Windows Server</li>
-        </ul>
+        <div class="badges">
+          <span class="badge">Linux</span>
+          <span class="badge">Windows Server</span>
+        </div>
       </div>
 
       <div class="stack-group">
         <h3>Konteneryzacja</h3>
-        <ul>
-          <li>Docker (build, deploy, maintenance)</li>
-        </ul>
+        <div class="badges">
+          <span class="badge">Docker</span>
+        </div>
       </div>
 
       <div class="stack-group">
         <h3>Bazy danych</h3>
-        <ul>
-          <li>PostgreSQL</li>
-          <li>MySQL</li>
-        </ul>
+        <div class="badges">
+          <span class="badge">PostgreSQL</span>
+          <span class="badge">MySQL</span>
+        </div>
       </div>
 
       <div class="stack-group">
-        <h3>CI/CD & Automatyzacja</h3>
-        <ul>
-          <li>CI/CD (GitLab CI)</li>
-          <li>Automatyzacja procesów wdrożeniowych</li>
-        </ul>
+        <h3>CI/CD</h3>
+        <div class="badges">
+          <span class="badge">CI/CD Pipelines</span>
+          <span class="badge">Automatyzacja</span>
+        </div>
       </div>
 
       <div class="stack-group">
         <h3>Środowisko</h3>
-        <ul>
-          <li>Systemy ERP</li>
-          <li>Środowiska produkcyjne i testowe</li>
-        </ul>
+        <div class="badges">
+          <span class="badge">ERP Systems</span>
+          <span class="badge">Produkcyjne</span>
+          <span class="badge">Developerskie</span>
+          <span class="badge">Testowe</span>
+        </div>
       </div>
     </div>
   </section>
@@ -110,11 +139,6 @@
     <p>
       Chcę nauczyć się tworzyć nowoczesne strony i aplikacje internetowe.
     </p>
-  </section>
-
-  <section id="contact" class="card animate">
-    <h2>Kontakt</h2>
-    <p>Email: kontakt@example.com</p>
   </section>
 
   <section id="projects" class="card animate">
@@ -176,6 +200,25 @@
     </a>
   </div>
 </section>
+
+<section id="extra" class="card animate">
+  <h2>Poza pracą</h2>
+
+  <p>
+    Poza pracą zawodową prowadzę kanał na YouTube, gdzie tworzę treści
+    związane z LEGO Star Wars. To projekt hobbystyczny, który pozwala mi
+    rozwijać kreatywność i regularność w tworzeniu contentu.
+  </p>
+
+  <a
+    href="https://www.youtube.com/@MrDawkin"
+    target="_blank"
+    class="youtube-link"
+  >
+    ▶️ Mój kanał na YouTube
+  </a>
+</section>
+
 </main>
     <footer class="footer">
       <p>© 2025 Moja strona</p>
