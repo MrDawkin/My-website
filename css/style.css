@@ -76,6 +76,16 @@ body {
 
 /* mobile */
 @media (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav {
+    width: 100%;
+    margin-top: 20px;
+  }
+
   .hamburger {
     display: block;
   }
@@ -90,6 +100,10 @@ body {
   .nav-links.active {
     display: flex;
   }
+}
+
+body.dark .profile-role {
+  color: #818cf8;
 }
 
 #themeToggle {
@@ -236,4 +250,63 @@ body.dark .hamburger {
 .animate.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ===== Profile section ===== */
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.profile-image {
+  width: 160px;
+  height: 200px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.profile-text h2 {
+  margin-bottom: 8px;
+}
+
+.profile-role {
+  font-weight: 600;
+  color: #4f46e5;
+  margin-bottom: 12px;
+}
+
+/* ===== Stack section ===== */
+
+.stack {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.stack-group h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.stack-group ul {
+  list-style: none;
+  padding: 0;
+}
+
+.stack-group li {
+  padding: 6px 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.stack-group li:last-child {
+  border-bottom: none;
+}
+
+body.dark .stack-group li {
+  border-color: #1e293b;
 }
