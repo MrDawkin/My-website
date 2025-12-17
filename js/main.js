@@ -18,3 +18,28 @@ button.addEventListener("click", () => {
     localStorage.setItem("theme", "light");
   }
 });
+
+const hamburger = document.querySelector("#hamburger");
+const navLinks = document.querySelector("#navLinks");
+
+hamburger.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+
+const animatedElements = document.querySelectorAll(".animate");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.2,
+  }
+);
+
+animatedElements.forEach((el) => observer.observe(el));
