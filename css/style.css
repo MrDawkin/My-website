@@ -31,6 +31,7 @@ body {
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
 }
 
 .card:hover {
@@ -53,25 +54,55 @@ body {
 /* ===== NAV ===== */
 
 .nav {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 20px;
+  gap: 28px;
 }
 
 .hamburger {
   display: none;
-  font-size: 28px;
+  font-size: 26px;
   background: none;
   border: none;
-  color: white;
+  color: #e5e7eb;
   cursor: pointer;
 }
 
 /* desktop */
-.nav-links {
-  display: flex;
-  gap: 20px;
+.nav-links a {
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: none;
+  padding: 6px 2px;
+
+  transition: color 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: #e5e7eb;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #60a5fa, #818cf8);
+  transition: width 0.25s ease;
+  border-radius: 999px;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 /* mobile */
@@ -90,11 +121,21 @@ body {
     display: block;
   }
 
-  .nav-links {
+   .nav-links {
     display: none;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+
     flex-direction: column;
-    margin-top: 20px;
-    gap: 12px;
+    gap: 8px;
+
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+
+    padding: 12px;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.15);
   }
 
   .nav-links.active {
@@ -109,6 +150,16 @@ body {
   .hero-profile .profile-image {
     width: 140px;
     height: 140px;
+  }
+
+  .hero-video {
+    display: none;
+  }
+
+  .hero {
+    background-image: url("images/cloud-bg.jpg");
+    background-size: cover;
+    background-position: center;
   }
 
 }
@@ -342,6 +393,12 @@ body.dark .hamburger {
   gap: 8px;
 }
 
+.badge:hover {
+  transform: scale(1.05);
+  background-color: #2563eb;
+}
+
+
 .badge {
   padding: 6px 12px;
   border-radius: 999px;
@@ -398,9 +455,24 @@ body.dark .youtube-link {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-image: url("images/cloud-bg.jpg");
   background-size: cover;
   background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(1.15) contrast(1.05) blur(1px);
 }
 
 .hero::after {
@@ -422,10 +494,11 @@ body.dark .youtube-link {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(2, 6, 23, 0.85),
-    rgba(2, 6, 23, 0.95)
+    rgba(2, 6, 23, 0.5),
+    rgba(2, 6, 23, 0.75)
   );
 }
+
 
 .hero-content {
   position: relative;
@@ -435,6 +508,7 @@ body.dark .youtube-link {
   padding: 80px 20px;
   padding-bottom: 200px;
 }
+
 
 /* ===== Hero profile ===== */
 
