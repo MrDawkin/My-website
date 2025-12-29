@@ -55,13 +55,29 @@ body {
 
 .nav {
   position: absolute;
-  top: 32px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-
   display: flex;
-  gap: 28px;
+  gap: 32px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  background: rgba(2, 6, 23, 0.25);
+  animation: navFade 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes navFade {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 .hamburger {
@@ -76,17 +92,20 @@ body {
 /* desktop */
 .nav-links a {
   position: relative;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: #94a3b8;
   text-decoration: none;
   padding: 6px 2px;
-
   transition: color 0.25s ease;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
 }
 
 .nav-links a:hover {
   color: #e5e7eb;
+  opacity: 1;
 }
 
 .nav-links a::after {
@@ -98,10 +117,30 @@ body {
   height: 2px;
   background: linear-gradient(90deg, #60a5fa, #818cf8);
   transition: width 0.25s ease;
-  border-radius: 999px;
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(96,165,250,0.6);
 }
 
 .nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a.active {
+  color: #e5e7eb;
+  opacity: 1;
+}
+
+.nav-links a.active::after {
+  width: 100%;
+  background: linear-gradient(90deg, #60a5fa, #818cf8);
+}
+
+.nav-link.active {
+  color: #e5e7eb;
+  opacity: 1;
+}
+
+.nav-link.active::after {
   width: 100%;
 }
 
@@ -190,7 +229,7 @@ body.dark .profile-role {
 }
 
 #themeToggle {
-  margin-top: 25px;
+  margin-top: 24px;
   padding: 12px 20px;
   border: none;
   border-radius: 999px;
@@ -199,6 +238,7 @@ body.dark .profile-role {
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  opacity: 0.85;
 }
 
 #themeToggle:hover {
@@ -507,8 +547,20 @@ body.dark .youtube-link {
   margin: 0 auto;
   padding: 80px 20px;
   padding-bottom: 200px;
+  animation: heroFade 0.8s ease-out forwards;
+  opacity: 0;
 }
 
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* ===== Hero profile ===== */
 
@@ -628,11 +680,17 @@ body.dark .youtube-link {
   color: #e5e7eb;
 }
 
+@keyframes pulse {
+  0%,100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
 .scroll-hint {
   display: block;
-  margin-top: 20px;
-  font-size: 13px;
-  opacity: 0.6;
+  margin-top: 16px;
+  font-size: 12px;
+  opacity: 0.5;
+  animation: pulse 2s infinite;
 }
 
 #about {
