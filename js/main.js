@@ -17,7 +17,12 @@ const terminalInput = document.getElementById("terminalInput");
 ================================ */
 
 const savedTheme = localStorage.getItem("theme");
-if (savedTheme === "dark") body.classList.add("dark");
+if (savedTheme === "light") {
+  body.classList.remove("dark");
+} else {
+  body.classList.add("dark");
+  localStorage.setItem("theme", "dark");
+}
 
 const syncIcon = () => {
   const icon = themeToggle?.querySelector(".theme-toggle__icon");
@@ -34,7 +39,6 @@ if (themeToggle) {
     syncIcon();
   });
 }
-
 
 
 /* ===============================
