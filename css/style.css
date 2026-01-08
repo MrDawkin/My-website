@@ -84,7 +84,8 @@ body {
   transform: translate(-50%, -50%);
   object-fit: cover;
   z-index: 0;
-  filter: brightness(1.15) contrast(1.05) blur(1px);
+  filter: brightness(1.05) contrast(1.15) saturate(0.95);
+  opacity: .8;
 }
 
 .hero::after {
@@ -111,9 +112,15 @@ body {
   z-index: 2;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 80px 20px 200px;
+  padding: 64px 20px 160px;
   animation: heroFade 0.8s ease-out forwards;
   opacity: 0;
+  background: rgba(2,6,23,.28);
+  border: 1px solid rgba(148,163,184,.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 28px;
+  box-shadow: 0 30px 90px rgba(0,0,0,.45);
 
   /* żeby rzeczy nie nachodziły na siebie */
   display: flex;
@@ -140,26 +147,69 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* =========================
-   THEME TOGGLE
-========================= */
-#themeToggle {
-  margin-top: 8px;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 999px;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #1e40af;
-  font-weight: 700;
+/* ===== THEME TOGGLE (glass icon) ===== */
+.theme-toggle {
+  all: unset; /* resetuje button styles */
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  opacity: 0.95;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+
+  font-size: 16px;
+  line-height: 1;
+
+  color: rgba(226, 232, 240, 0.7);
+  background: rgba(2, 6, 23, 0.35);
+
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+
+  opacity: 0.65;
 }
 
+/* hover – delikatny, utility look */
 #themeToggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  opacity: 1;
+  color: #e5e7eb;
+  background: rgba(59, 130, 246, 0.18);
+  box-shadow:
+    0 0 0 1px rgba(96, 165, 250, 0.25),
+    0 8px 24px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
 }
+
+/* active click */
+#themeToggle:active {
+  transform: scale(0.96);
+}
+
+/* focus (accessibility) */
+#themeToggle:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(96, 165, 250, 0.5),
+    0 0 0 6px rgba(96, 165, 250, 0.15);
+}
+
+/* dark mode – subtelnie jaśniejszy */
+body.dark #themeToggle {
+  background: rgba(2, 6, 23, 0.55);
+  color: rgba(226, 232, 240, 0.8);
+}
+
 
 /* =========================
    NAV (FIX + MODERN LOOK)
@@ -179,6 +229,7 @@ body {
   width: 100%;
 
   margin-top: 4px;
+  margin-bottom: 6px;
   animation: navFade 0.55s ease-out forwards;
   opacity: 0;
 }
@@ -302,6 +353,14 @@ body {
   .hero-profile {
     flex-direction: column;
     text-align: center;
+    margin-top: 34px;
+  }
+
+  .hero-stack {
+  margin-top: 6px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: rgba(226, 232, 240, 0.65);
   }
 
   .hero-profile .profile-image {
@@ -430,17 +489,26 @@ body {
 /* =========================
    SCROLL HINT
 ========================= */
-@keyframes pulse {
+
+/* @keyframes pulse {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 0.8; }
+} */
+
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
 }
+
 
 .scroll-hint {
   display: block;
   margin-top: 16px;
   font-size: 12px;
-  opacity: 0.5;
-  animation: pulse 2s infinite;
+  opacity: 0.7;
+  animation: pulse 2s infinite, float 2.5s ease-in-out infinite;
+  
 }
 
 /* =========================
@@ -548,7 +616,10 @@ body {
 
 .hero-profile p {
   max-width: 600px;
-  line-height: 1.6;
+  font-size: 15px;
+  letter-spacing: .01em;
+  line-height: 1.7;
+  color: rgba(226,232,240,.92);
 }
 
 /* ring za zdjęciem */
@@ -565,6 +636,20 @@ body {
   z-index: 0;
 }
 
+.hero-profile::after{
+  border: 0;
+  background: conic-gradient(
+    from 200deg,
+    rgba(96,165,250,.0),
+    rgba(96,165,250,.35),
+    rgba(129,140,248,.25),
+    rgba(96,165,250,.0)
+  );
+  mask: radial-gradient(circle, transparent 62%, #000 64%);
+  -webkit-mask: radial-gradient(circle, transparent 62%, #000 64%);
+  box-shadow: 0 0 70px rgba(96,165,250,.25);
+}
+
 /* CTA */
 .hero-cta {
   margin-top: 18px;
@@ -576,11 +661,12 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 14px 40px rgba(37,99,235,.35);
 }
 
 .hero-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 18px 55px rgba(37,99,235,.45);
 }
 
 /* =========================

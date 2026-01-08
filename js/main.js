@@ -19,13 +19,23 @@ const terminalInput = document.getElementById("terminalInput");
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme === "dark") body.classList.add("dark");
 
-themeToggle.addEventListener("click", () => {
-  body.classList.toggle("dark");
-  localStorage.setItem(
-    "theme",
-    body.classList.contains("dark") ? "dark" : "light"
-  );
-});
+const syncIcon = () => {
+  const icon = themeToggle?.querySelector(".theme-toggle__icon");
+  if (!icon) return;
+  icon.textContent = body.classList.contains("dark") ? "☀️" : "🌙";
+};
+
+syncIcon();
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    body.classList.toggle("dark");
+    localStorage.setItem("theme", body.classList.contains("dark") ? "dark" : "light");
+    syncIcon();
+  });
+}
+
+
 
 /* ===============================
    MOBILE NAV
