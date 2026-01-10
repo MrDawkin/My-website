@@ -19,7 +19,7 @@ const terminalInput = document.getElementById("terminalInput");
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme === "light") {
   body.classList.remove("dark");
-} else {
+} else { 
   body.classList.add("dark");
   localStorage.setItem("theme", "dark");
 }
