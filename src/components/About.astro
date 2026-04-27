@@ -1,0 +1,79 @@
+---
+const bio = [
+  'Pracuję jako Junior DevOps Engineer w Comarch, gdzie administruję ponad 200 środowiskami klienckimi systemów ERP, dbając o ich stabilność, konfigurację i ciągłość działania.',
+  'Na co dzień pracuję z Linuksem, Windows Server i Dockerem. Utrzymuję bazy danych PostgreSQL, MSSQL i MySQL, zarządzam dostępami i certyfikatami oraz automatyzuję powtarzalne zadania skryptami Bash.',
+  'Rozwijam się w kierunku AWS i automatyzacji z Pythonem. Interesuje mnie skalowalna infrastruktura i narzędzia wspierające pracę inżynierską.',
+];
+
+const bioEn = [
+  'I work as a Junior DevOps Engineer at Comarch, where I manage over 200 client ERP environments, ensuring their stability, configuration, and continuity.',
+  'Day to day I work with Linux, Windows Server, and Docker. I maintain PostgreSQL, MSSQL, and MySQL databases, manage access and certificates, and automate repetitive tasks with Bash scripts.',
+  'I\'m growing towards AWS and Python automation. I\'m interested in scalable infrastructure and tools that support engineering work.',
+];
+
+const facts: { label: string; value: string }[] = [
+  { label: 'Rola',        value: 'Junior DevOps Engineer'                            },
+  { label: 'Firma',       value: 'Comarch'                                           },
+  { label: 'Dział',       value: 'AI Enterprise Solutions, BU Technology & Products' },
+  { label: 'Systemy',     value: 'Linux, Windows Server'                             },
+  { label: 'Bazy',        value: 'PostgreSQL, MSSQL, MySQL'                          },
+  { label: 'Obszar',      value: 'ERP, infrastruktura, automatyzacja'                },
+  { label: 'Lokalizacja', value: 'Wrocław, Polska'                                   },
+];
+
+const factsEn: { label: string; value: string }[] = [
+  { label: 'Role',       value: 'Junior DevOps Engineer'                            },
+  { label: 'Company',    value: 'Comarch'                                           },
+  { label: 'Department', value: 'AI Enterprise Solutions, BU Technology & Products' },
+  { label: 'Systems',    value: 'Linux, Windows Server'                             },
+  { label: 'Databases',  value: 'PostgreSQL, MSSQL, MySQL'                          },
+  { label: 'Focus',      value: 'ERP, infrastructure, automation'                   },
+  { label: 'Location',   value: 'Wrocław, Poland'                                   },
+];
+---
+
+<section id="about" class="py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <!-- Section label -->
+    <p class="font-mono text-xs text-blue-400/70 tracking-[0.2em] uppercase mb-2 reveal">
+      01 / about
+    </p>
+
+    <h2 class="text-3xl md:text-4xl font-bold text-slate-100 tracking-tight mb-16 reveal">
+      <span class="lang-pl">O mnie</span>
+      <span class="lang-en">About me</span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
+
+      <!-- Bio -->
+      <div class="space-y-4 reveal">
+        {bio.map((paragraph, i) => (
+          <p class="text-slate-400 leading-[1.85]">
+            <span class="lang-pl">{paragraph}</span>
+            <span class="lang-en">{bioEn[i]}</span>
+          </p>
+        ))}
+      </div>
+
+      <!-- Facts table -->
+      <div class="reveal">
+        <dl class="space-y-3">
+          {facts.map(({ label, value }, i) => (
+            <div class="grid grid-cols-[120px_1fr] gap-4 text-sm border-b border-brand-border/50 pb-3 last:border-0 last:pb-0">
+              <dt class="font-mono text-slate-500 text-xs tracking-wide pt-0.5">
+                <span class="lang-pl">{label}</span>
+                <span class="lang-en">{factsEn[i]!.label}</span>
+              </dt>
+              <dd class="text-slate-300">
+                <span class="lang-pl">{value}</span>
+                <span class="lang-en">{factsEn[i]!.value}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>

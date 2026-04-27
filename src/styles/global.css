@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   GLOBAL BASE
+========================================= */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  body {
+    background-color: #080C14;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /*
+    Subtelna tekstura noise — dodaje głębię płaskiemu ciemnemu tłu.
+    Technika używana przez Vercel, Linear, Resend.
+    Opacity 0.02 = praktycznie niezauważalna, ale poprawia odbiór premium.
+  */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+  }
+
+  ::selection {
+    background-color: rgba(59, 130, 246, 0.25);
+    color: #bfdbfe;
+  }
+}
+
+/* =========================================
+   UTILITIES
+========================================= */
+@layer utilities {
+  /* Dot grid — subtelny wzór w tle hero */
+  .dot-grid {
+    background-image: radial-gradient(
+      circle,
+      rgba(148, 163, 184, 0.07) 1.5px,
+      transparent 1.5px
+    );
+    background-size: 28px 28px;
+  }
+
+  /*
+    Gradient text — używany na imieniu w hero.
+    slate-50 → slate-200 → blue-200: subtelny, nie krzykliwy.
+  */
+  .gradient-text {
+    background-image: linear-gradient(140deg, #f8fafc 0%, #e2e8f0 45%, #bfdbfe 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* =========================================
+   SCROLL REVEAL
+   JS (Layout.astro) dodaje .visible gdy element
+   wejdzie w viewport.
+========================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px); /* zmniejszone z 18px — bardziej dopracowane */
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger — opóźnienia dla dzieci w .reveal-group */
+.reveal-group > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-group > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal-group > *:nth-child(3) { transition-delay: 0.19s; }
+.reveal-group > *:nth-child(4) { transition-delay: 0.26s; }
+.reveal-group > *:nth-child(5) { transition-delay: 0.33s; }
+.reveal-group > *:nth-child(6) { transition-delay: 0.40s; }
+
+/* =========================================
+   MOBILE NAV — smooth slide animation
+   Zamiast Tailwind `hidden`/`flex` toggle,
+   używamy max-height transition dla płynnego
+   efektu otwarcia/zamknięcia.
+========================================= */
+#mobile-menu {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition:
+    max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease;
+}
+
+#mobile-menu.is-open {
+  max-height: 400px;
+  opacity: 1;
+}
+
+/* =========================================
+   TERMINAL — custom scrollbar
+========================================= */
+.terminal-body {
+  scrollbar-width: thin;
+  scrollbar-color: #1e293b transparent;
+}
+
+.terminal-body::-webkit-scrollbar       { width: 4px; }
+.terminal-body::-webkit-scrollbar-track { background: transparent; }
+.terminal-body::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
+
+/* =========================================
+   FOCUS VISIBLE — global
+========================================= */
+:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.6);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =========================================
+   LANGUAGE TOGGLE — PL / EN
+========================================= */
+[data-lang="en"] .lang-pl,
+[data-lang="pl"] .lang-en { display: none; }

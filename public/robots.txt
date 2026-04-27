@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mrdawkin.github.io/My-website/sitemap-index.xml

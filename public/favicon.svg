@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#080C14"/>
+  <text
+    x="5" y="23"
+    font-family="'JetBrains Mono', 'Courier New', monospace"
+    font-size="15"
+    font-weight="500"
+    fill="#3B82F6"
+    letter-spacing="-1"
+  >&gt;_</text>
+</svg>

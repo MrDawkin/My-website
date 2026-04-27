@@ -1,0 +1,129 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Dawid Kina — Junior DevOps Engineer',
+  description = 'Junior DevOps Engineer w Comarch. Administracja ponad 200 środowiskami ERP — Linux, Docker, bazy danych, automatyzacja skryptami Bash i Python.',
+} = Astro.props;
+
+const siteUrl = 'https://mrdawkin.github.io/My-website';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? siteUrl);
+const ogImage = `${import.meta.env.BASE_URL}og.png`;
+---
+
+<!DOCTYPE html>
+<html lang="pl" data-lang="pl" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <script is:inline>
+      (function(){var l=localStorage.getItem('lang')||'pl';var h=document.documentElement;h.dataset.lang=l;h.lang=l;})();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Dawid Kina" />
+
+    <!-- Open Graph -->
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content={canonicalURL} />
+    <meta property="og:image"       content={ogImage} />
+    <meta property="og:locale"      content="pl_PL" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={ogImage} />
+
+    <link rel="canonical"        href={canonicalURL} />
+    <link rel="icon"             type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
+    <link rel="manifest"         href={`${import.meta.env.BASE_URL}manifest.webmanifest`} />
+    <meta name="theme-color"     content="#080C14" />
+
+    <!-- JSON-LD: Person schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dawid Kina",
+      "jobTitle": "Junior DevOps Engineer",
+      "url": "https://mrdawkin.github.io/My-website",
+      "worksFor": { "@type": "Organization", "name": "Comarch" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Wrocław", "addressCountry": "PL" },
+      "sameAs": [
+        "https://github.com/MrDawkin",
+        "https://www.linkedin.com/in/dawid-kina/"
+      ],
+      "knowsAbout": ["Linux", "Docker", "DevOps", "PostgreSQL", "MSSQL", "Windows Server", "Bash", "GitHub Actions"]
+    }
+    </script>
+
+    <title>{title}</title>
+  </head>
+
+  <body class="bg-brand-bg text-slate-200 font-sans antialiased">
+    <slot />
+
+    <!-- Back to top -->
+    <button
+      id="back-to-top"
+      aria-label="Wróć na górę"
+      class="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-full border border-brand-border bg-brand-surface text-slate-400 hover:text-slate-100 hover:border-slate-600 shadow-lg transition-all duration-300 flex items-center justify-center opacity-0 pointer-events-none translate-y-2"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+      </svg>
+    </button>
+
+    <script>
+      const btn = document.getElementById('back-to-top');
+
+      window.addEventListener('scroll', () => {
+        const show = window.scrollY > 400;
+        btn?.classList.toggle('opacity-0',        !show);
+        btn?.classList.toggle('opacity-100',       show);
+        btn?.classList.toggle('pointer-events-none', !show);
+        btn?.classList.toggle('translate-y-2',    !show);
+        btn?.classList.toggle('translate-y-0',     show);
+      }, { passive: true });
+
+      btn?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      const syncBtnLabel = () => {
+        const lang = document.documentElement.getAttribute('data-lang');
+        btn?.setAttribute('aria-label', lang === 'en' ? 'Back to top' : 'Wróć na górę');
+      };
+      syncBtnLabel();
+      document.addEventListener('langchange', syncBtnLabel);
+    </script>
+
+    <!-- Globalny IntersectionObserver dla .reveal -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

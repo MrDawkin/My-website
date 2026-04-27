@@ -1,0 +1,71 @@
+---
+import { stack, levelLabels, levelLabelsEn, type StackLevel } from '../data/stack';
+
+const levelColor: Record<StackLevel, string> = {
+  daily:      'bg-blue-400',
+  proficient: 'bg-slate-400',
+  learning:   'bg-amber-400',
+};
+
+const levelTextColor: Record<StackLevel, string> = {
+  daily:      'text-blue-400/80',
+  proficient: 'text-slate-500',
+  learning:   'text-amber-400/80',
+};
+---
+
+<section id="stack" class="py-24 md:py-32 bg-brand-surface">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <!-- Section label -->
+    <p class="font-mono text-xs text-blue-400/70 tracking-[0.2em] uppercase mb-2 reveal">
+      02 / stack
+    </p>
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-100 tracking-tight reveal">
+        <span class="lang-pl">Stack & Technologie</span>
+        <span class="lang-en">Stack & Technologies</span>
+      </h2>
+
+      <!-- Legenda poziomów -->
+      <div class="flex items-center gap-5 reveal">
+        {(Object.entries(levelLabels) as [StackLevel, string][]).map(([level, label]) => (
+          <div class="flex items-center gap-2">
+            <span class={`inline-block w-2 h-2 rounded-full flex-shrink-0 ${levelColor[level]}`}></span>
+            <span class={`text-xs font-mono ${levelTextColor[level]}`}>
+              <span class="lang-pl">{label}</span>
+              <span class="lang-en">{levelLabelsEn[level]}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Stack grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal-group">
+      {stack.map((category) => (
+        <div class="reveal bg-brand-card border border-brand-border rounded-2xl p-6
+                    hover:border-slate-700 hover:shadow-xl hover:shadow-black/30
+                    transition-all duration-200">
+
+          <h3 class="font-mono text-xs text-blue-400/80 tracking-[0.15em] uppercase mb-5">
+            <span class="lang-pl">{category.label}</span>
+            <span class="lang-en">{category.labelEn}</span>
+          </h3>
+
+          <ul class="space-y-3">
+            {category.items.map((item) => (
+              <li class="flex items-center gap-3">
+                <span
+                  class={`flex-shrink-0 w-2 h-2 rounded-full ${levelColor[item.level]}`}
+                ></span>
+                <span class="text-sm text-slate-300">{item.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

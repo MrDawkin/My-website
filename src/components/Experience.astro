@@ -1,0 +1,126 @@
+---
+import { experience } from '../data/experience';
+
+const main  = experience.filter(e => !e.additional);
+const extra = experience.filter(e =>  e.additional);
+---
+
+<section id="experience" class="py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <!-- Section label -->
+    <p class="font-mono text-xs text-blue-400/70 tracking-[0.2em] uppercase mb-2 reveal">
+      03 / experience
+    </p>
+
+    <h2 class="text-3xl md:text-4xl font-bold text-slate-100 tracking-tight mb-14 reveal">
+      <span class="lang-pl">Doświadczenie</span>
+      <span class="lang-en">Experience</span>
+    </h2>
+
+    <!-- Timeline — główne wpisy -->
+    <div class="relative space-y-10">
+      <div
+        class="hidden md:block absolute left-0 top-2 bottom-2 w-px bg-gradient-to-b from-blue-500/40 via-brand-border to-transparent"
+        aria-hidden="true"
+      ></div>
+
+      {main.map((entry) => (
+        <div class="reveal md:pl-10 relative">
+          <div
+            class="hidden md:flex absolute left-0 top-1.5 -translate-x-1/2 w-2.5 h-2.5 rounded-full border-2 border-blue-500 bg-brand-bg"
+            aria-hidden="true"
+          ></div>
+
+          <div class="bg-brand-surface border border-brand-border rounded-2xl p-6 md:p-8 hover:border-slate-700 hover:shadow-xl hover:shadow-black/25 transition-all duration-200">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+              <div>
+                <h3 class="text-lg font-semibold text-slate-100 tracking-tight">
+                  <span class="lang-pl">{entry.role}</span>
+                  <span class="lang-en">{entry.roleEn ?? entry.role}</span>
+                </h3>
+                <p class="text-sm text-slate-400 mt-0.5 font-mono">
+                  {entry.company}
+                </p>
+                {entry.department && (
+                  <p class="text-xs text-slate-500 mt-0.5 font-mono">
+                    <span class="lang-pl">{entry.department}</span>
+                    <span class="lang-en">{entry.departmentEn ?? entry.department}</span>
+                  </p>
+                )}
+              </div>
+
+              <span class="flex-shrink-0 font-mono text-xs text-slate-400 bg-brand-bg border border-brand-border rounded-lg px-3 py-1.5 h-fit">
+                {entry.period.start} — {entry.period.end ? entry.period.end : <span><span class="lang-pl">obecnie</span><span class="lang-en">present</span></span>}
+              </span>
+            </div>
+
+            <ul class="space-y-2">
+              {entry.description.map((point, i) => (
+                <li class="flex gap-3 text-sm text-slate-400 leading-relaxed">
+                  <span class="flex-shrink-0 text-blue-500 mt-1" aria-hidden="true">▸</span>
+                  <span>
+                    <span class="lang-pl">{point}</span>
+                    <span class="lang-en">{entry.descriptionEn[i] ?? point}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Dodatkowe doświadczenie -->
+    {extra.length > 0 && (
+      <div class="mt-16">
+        <p class="font-mono text-xs text-slate-600 tracking-[0.2em] uppercase mb-6 reveal">
+          <span class="lang-pl">Dodatkowe doświadczenie</span>
+          <span class="lang-en">Additional Experience</span>
+        </p>
+
+        <div class="space-y-4">
+          {extra.map((entry) => (
+            <div class="reveal">
+              <div class="bg-brand-surface/50 border border-brand-border/60 rounded-2xl p-5 md:p-6 hover:border-slate-700/60 transition-all duration-200">
+                <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                  <div>
+                    <h3 class="text-base font-medium text-slate-300 tracking-tight">
+                      <span class="lang-pl">{entry.role}</span>
+                      <span class="lang-en">{entry.roleEn ?? entry.role}</span>
+                    </h3>
+                    <p class="text-sm text-slate-500 mt-0.5 font-mono">
+                      {entry.company}
+                    </p>
+                    {entry.department && (
+                      <p class="text-xs text-slate-600 mt-0.5 font-mono">
+                        <span class="lang-pl">{entry.department}</span>
+                        <span class="lang-en">{entry.departmentEn ?? entry.department}</span>
+                      </p>
+                    )}
+                  </div>
+
+                  <span class="flex-shrink-0 font-mono text-xs text-slate-500 bg-brand-bg border border-brand-border/60 rounded-lg px-3 py-1.5 h-fit">
+                    {entry.period.start} — {entry.period.end ? entry.period.end : <span><span class="lang-pl">obecnie</span><span class="lang-en">present</span></span>}
+                  </span>
+                </div>
+
+                <ul class="space-y-1.5">
+                  {entry.description.map((point, i) => (
+                    <li class="flex gap-3 text-sm text-slate-500 leading-relaxed">
+                      <span class="flex-shrink-0 text-slate-600 mt-1" aria-hidden="true">▸</span>
+                      <span>
+                        <span class="lang-pl">{point}</span>
+                        <span class="lang-en">{entry.descriptionEn[i] ?? point}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>

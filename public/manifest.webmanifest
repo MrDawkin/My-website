@@ -1,0 +1,23 @@
+{
+  "name": "Dawid Kina — Junior DevOps Engineer",
+  "short_name": "Dawid Kina",
+  "description": "Portfolio — Junior DevOps Engineer, Comarch, Wrocław",
+  "start_url": "/My-website/",
+  "display": "standalone",
+  "background_color": "#080C14",
+  "theme_color": "#080C14",
+  "icons": [
+    {
+      "src": "/My-website/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/My-website/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

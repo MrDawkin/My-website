@@ -1,0 +1,184 @@
+---
+const navItems = [
+  { href: '#about',      label: 'About'      },
+  { href: '#stack',      label: 'Stack'      },
+  { href: '#experience', label: 'Experience' },
+  { href: '#education',  label: 'Education'  },
+  { href: '#projects',   label: 'Projects'   },
+  { href: '#contact',    label: 'Contact'    },
+];
+
+const initials = 'DK';
+
+// Status usunięty z nav — widoczny w hero (nie potrzebny w dwóch miejscach)
+---
+
+<header
+  id="site-nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
+  <div class="max-w-5xl mx-auto px-6">
+    <nav class="flex items-center justify-between h-16">
+
+      <!-- Logo / inicjały -->
+      <a
+        href="#"
+        class="font-mono text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors tracking-widest"
+        aria-label="Powrót na górę / Back to top"
+      >
+        &gt;_ {initials}
+      </a>
+
+      <!-- Linki (desktop) -->
+      <div class="hidden md:flex items-center gap-7">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm text-slate-500 hover:text-slate-200 transition-colors duration-200 nav-link"
+          >
+            {item.label}
+          </a>
+        ))}
+        <button
+          class="lang-toggle-btn font-mono text-xs tracking-widest border border-brand-border rounded-full px-3 py-1.5 text-slate-500 hover:text-blue-400 hover:border-blue-500/40 transition-all duration-200"
+          aria-label="Switch language / Zmień język"
+        >
+          <span class="lang-pl">EN</span>
+          <span class="lang-en">PL</span>
+        </button>
+      </div>
+
+      <!-- Hamburger (mobile) -->
+      <button
+        id="hamburger-btn"
+        class="md:hidden text-slate-400 hover:text-slate-200 transition-colors p-1 -mr-1"
+        aria-label="Otwórz menu"
+        aria-expanded="false"
+      >
+        <svg id="icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!--
+      Mobile menu — animacja przez max-height w global.css.
+      Brak `hidden` — widoczność kontrolowana przez CSS (max-height: 0).
+    -->
+    <div id="mobile-menu" class="md:hidden">
+      <div class="bg-brand-surface border border-brand-border rounded-2xl p-3 flex flex-col gap-0.5 mt-1 mb-3">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class="mobile-nav-link block px-3 py-2.5 text-sm text-slate-400 hover:text-slate-100 hover:bg-white/[0.04] rounded-xl transition-colors"
+          >
+            {item.label}
+          </a>
+        ))}
+        <div class="border-t border-brand-border/50 mt-1 pt-1">
+          <button class="lang-toggle-btn mobile-nav-link block w-full text-left px-3 py-2.5 text-sm text-slate-400 hover:text-slate-100 hover:bg-white/[0.04] rounded-xl transition-colors font-mono text-xs tracking-wider">
+            <span class="lang-pl">Switch to English</span>
+            <span class="lang-en">Przełącz na polski</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // ── Nav background przy scrollowaniu ─────────────────────────────────────
+  const isEn = () => document.documentElement.getAttribute('data-lang') === 'en';
+
+  const nav = document.getElementById('site-nav');
+
+  const updateNav = () => {
+    const scrolled = window.scrollY > 20;
+    nav?.classList.toggle('bg-[#080C14]/90',     scrolled);
+    nav?.classList.toggle('backdrop-blur-xl',    scrolled);
+    nav?.classList.toggle('border-b',            scrolled);
+    nav?.classList.toggle('border-slate-800/30', scrolled);
+  };
+
+  updateNav(); // stan przy załadowaniu (np. po odświeżeniu po scrollnięciu)
+  window.addEventListener('scroll', updateNav, { passive: true });
+
+  // ── Hamburger — płynna animacja (max-height w CSS) ────────────────────────
+  const btn       = document.getElementById('hamburger-btn');
+  const menu      = document.getElementById('mobile-menu');
+  const iconOpen  = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
+  const openMenu = () => {
+    menu?.classList.add('is-open');
+    iconOpen?.classList.add('hidden');
+    iconClose?.classList.remove('hidden');
+    btn?.setAttribute('aria-expanded', 'true');
+    btn?.setAttribute('aria-label', isEn() ? 'Close menu' : 'Zamknij menu');
+  };
+
+  const closeMenu = () => {
+    menu?.classList.remove('is-open');
+    iconOpen?.classList.remove('hidden');
+    iconClose?.classList.add('hidden');
+    btn?.setAttribute('aria-expanded', 'false');
+    btn?.setAttribute('aria-label', isEn() ? 'Open menu' : 'Otwórz menu');
+  };
+
+  btn?.setAttribute('aria-label', isEn() ? 'Open menu' : 'Otwórz menu');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.contains('is-open') ? closeMenu() : openMenu();
+  });
+
+  // Zamknij menu po kliknięciu linku
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // ── Aktywny link w nav — highlight przy scrollowaniu ─────────────────────
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach((link) => {
+            const isActive = link.getAttribute('href') === `#${id}`;
+            link.classList.toggle('text-slate-200', isActive);
+            link.classList.toggle('text-slate-500', !isActive);
+          });
+        }
+      });
+    },
+    { rootMargin: '-40% 0px -55% 0px' }
+  );
+
+  sections.forEach((s) => sectionObserver.observe(s));
+
+  // ── Language toggle ────────────────────────────────────────────────────────
+  document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const h   = document.documentElement;
+      const next = (h.getAttribute('data-lang') ?? 'pl') === 'pl' ? 'en' : 'pl';
+      h.setAttribute('data-lang', next);
+      h.setAttribute('lang', next);
+      localStorage.setItem('lang', next);
+      document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: next } }));
+    });
+  });
+
+  document.addEventListener('langchange', (e: Event) => {
+    const { lang } = (e as CustomEvent<{ lang: string }>).detail;
+    const isMenuOpen = btn?.getAttribute('aria-expanded') === 'true';
+    btn?.setAttribute('aria-label', isMenuOpen
+      ? (lang === 'en' ? 'Close menu' : 'Zamknij menu')
+      : (lang === 'en' ? 'Open menu' : 'Otwórz menu')
+    );
+  });
+</script>
