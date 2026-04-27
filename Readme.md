@@ -1,6 +1,6 @@
-# Dawid Kina — Portfolio
+# Portfolio
 
-Personal portfolio website for Dawid Kina, Junior DevOps Engineer at Comarch.
+Personal portfolio website built with Astro and Tailwind CSS.
 
 Live: https://mrdawkin.github.io/My-website
 
