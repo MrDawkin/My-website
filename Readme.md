@@ -1,33 +1,36 @@
-# My Website
-https://mrdawkin.github.io/My-website
+# Dawid Kina — Portfolio
 
-## 🛠️ Technologie
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
-- Git
-- GitHub Pages
+Personal portfolio website for Dawid Kina, Junior DevOps Engineer at Comarch.
 
-## 📘 Git – szybka ściąga
+Live: https://mrdawkin.github.io/My-website
 
-### Sprawdzenie statusu
-git status
+## Tech stack
 
-### Dodawanie plików
-git add .
+- [Astro](https://astro.build) — static site framework
+- [Tailwind CSS](https://tailwindcss.com) — styling
+- TypeScript — data files and component logic
+- GitHub Actions — CI/CD deploy to GitHub Pages
 
-### Commit
-git commit -m "Opis zmian"
+## Development
 
-### Push
-git push
+```bash
+npm install
+npm run dev      # http://localhost:4321/My-website
+npm run build    # production build → dist/
+npm run preview  # preview build locally
+```
 
-### Pull
-git pull
+## Deploy
 
-### Typowy workflow
-git status
-git add .
-git commit -m "Co zrobiłem"
-git push
+Every push to `main` triggers the GitHub Actions workflow which builds the site and deploys to GitHub Pages.
 
+## Structure
+
+```
+src/
+  components/   # Astro components (Hero, About, Stack, Experience, ...)
+  data/         # TypeScript data files (experience, education, projects, stack)
+  layouts/      # HTML shell with meta, OG, JSON-LD
+  styles/       # global.css — Tailwind base + custom utilities
+public/         # static assets (og.png, favicon, manifest, sitemap)
+```
